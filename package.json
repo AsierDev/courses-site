@@ -30,12 +30,19 @@
     "node-sass": "^4.9.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+<<<<<<< HEAD
     "react-router-dom": "^4.3.1",
+=======
+>>>>>>> a5e05e63ea55b46e02f8988499a89263e3fcf1ab
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.10.2",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
+<<<<<<< HEAD
   },
   "dependencies": {}
+=======
+  }
+>>>>>>> a5e05e63ea55b46e02f8988499a89263e3fcf1ab
 }
