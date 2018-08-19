@@ -15,7 +15,7 @@ module.exports = new Schema({
     },
 
     price: {
-        type: Number
+        type: String
     },
 
     image: {
@@ -25,6 +25,18 @@ module.exports = new Schema({
     pdf: {
         type: String
     },
+
+    capacity: {
+        type: String
+    },
+
+    location: {
+        type: String
+    },
+    
+    date: {
+        type: String
+    }/* ,
 
     teachers: [
         {
@@ -38,17 +50,6 @@ module.exports = new Schema({
             type: ObjectId,
             ref: 'Students'
         }
-    ],
+    ] */
 
-    capacity: [
-        {
-            type: Number
-        }
-    ],
-
-    location: [
-        {
-            type: String
-        }
-    ]
 })
