@@ -18,7 +18,6 @@ module.exports = {
         ]
       },
       {
-<<<<<<< HEAD
         test: /\.css$/,
         use: [
           {
@@ -27,8 +26,6 @@ module.exports = {
         ]
       },
       {
-=======
->>>>>>> a5e05e63ea55b46e02f8988499a89263e3fcf1ab
         test: /\.scss$/,
         use: [
           "style-loader",
