@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Api from "../../../../../api/vmApi"
 import swal from 'sweetalert2'
+import firebase from 'firebase'
 
 class ManageCourses extends Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      description: '',
+      description: 'hello',
       excerpt: '',
       price: '',
       image: '',
@@ -17,9 +18,33 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
-
+      uploadValue: ''
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+  }
+
+  handleUpload = (e) => {
+    const file = e.target.files[0]
+    const storageRef = firebase.storage().ref(`/PDF/${file.name}`)
+    const task = storageRef.put(file)
+
+    task.on('state_changed', snapshot => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        this.setState({
+            uploadValue: percentage
+        })
+    }, error => {
+        console.log(error.message)
+    }, () => {
+        this.setState({
+            uploadValue: 100,
+            pdf: task.snapshot.metadata.fullPath
+        })
+    })
+}
 
   handleSubmit = e => {
     e.preventDefault()
@@ -53,7 +78,8 @@ class ManageCourses extends Component {
           capacity: '',
           location: '',
           date: '',
-          teacher: ''
+          teacher: '',
+          uploadValue: ''
         })
       )
   }  
@@ -113,7 +139,7 @@ class ManageCourses extends Component {
                     name="description" 
                     placeholder="Descripción curso" 
                     rows={12}  
-                    defaultValue={""} 
+                    defaultValue={this.state.description || ""} 
                     />
                   </div>
                 </div>
@@ -180,13 +206,19 @@ class ManageCourses extends Component {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6">
-                      <img src="https://michilot.com/wp-content/uploads/2017/12/pdficon.png" width="50" height="50" />
-                      <span>archivo de prueba subido.pdf</span>
+                      <progress value={this.state.uploadValue} mx="100"></progress>
+                      <br />
+                      <span>Añadir PDF</span>
+                      <input 
+                      type="file" 
+                      onChange={e => this.handleUpload(e)} 
+                      />
+                      {/* <img src="https://michilot.com/wp-content/uploads/2017/12/pdficon.png" width="50" height="50" /> */}
                     </div>
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                       <img src="http://cdn.onlinewebfonts.com/svg/img_148071.png" width="50" height="37" />
                       <span>imagendeprueba.jpg</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="col-md-12 mt-4">
