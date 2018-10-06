@@ -43,7 +43,7 @@ module.exports = {
     },
 
     listCourses() {
-        return Courses.find({})
+        return Courses.find({}).sort({date: -1})
     },
 
     removeCourse(name) {
@@ -56,6 +56,10 @@ module.exports = {
 
                 return Courses.deleteOne({ name })
             })
+    },
+
+    retrieveCourseQuery(query) {
+        return Courses.find({  name: new RegExp(query, 'i') }, { __v: 0 })
     },
 
     /////////////////////////////// STUDENTS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -127,7 +131,10 @@ module.exports = {
             })
     },
 
-    listTeachers() {
+    listTeachers(query) {
+        if (query) {
+            return Teachers.find({  name: new RegExp(query, 'i') }, { __v: 0 })
+        }
         return Teachers.find({}, { __v: 0 })
     },
 

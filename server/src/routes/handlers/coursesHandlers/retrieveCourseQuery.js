@@ -4,7 +4,7 @@ const logic = require('../../../logic')
 module.exports = (req, res) => {
     const { params: { query } } = req
 
-    logic.listTeachers(query)
-        .then(teachers => res.json(success(teachers)))
+    logic.retrieveCourseQuery(query)
+        .then(courses => res.json(success(courses)))
         .catch(err => res.json(fail(err.message)))
 }
